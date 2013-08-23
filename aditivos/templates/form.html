@@ -2,7 +2,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-	{% load staticfiles %}
+	{% load staticfiles widget_tweaks %}
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,21 +20,33 @@
 	</head>
 
 	<body>
+		<div class="container">
+			<div class="jumbotron">
 {% if not form.is_valid  %}
-		<form action="" method="post">
-		{% csrf_token %} 		
-		    {{ form.non_field_errors }}
-		        {{ form.sdata.errors }}
-		        {{ form.sdata }}
-		        {{ form.sdate.as_hidden }}
-		        
-			<input type="submit" value="Search" class="btn btn-default" />
+		<form action="" method="post" class="form-inline" role="form" >
+			
+	{% csrf_token %} 		
+	    {{ form.non_field_errors }}
+	    	<div class="input-group">
+	        {{ form.sdata | attr:"class:form-control" }}
+	        	<span class="input-group-btn">
+        			<button class="btn btn-default" type="submit">Search</button>
+      			</span>
+	        </div>
+        	{% if form.sdata.errors %}
+        	<div class="alert alert-danger">
+        		{{ form.sdata.errors }}
+        	</div>
+        	{% endif%}
+	        {{ form.sdate.as_hidden }}
 		</form>
 {% else %}
 	<h3>Registrando datos</h3>
 	<p>{{ form.sdata.value }} y {{ form.sdate.value }}</p>
 {% endif %}
 
+			</div>
+		</div>    		
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="//code.jquery.com/jquery.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
