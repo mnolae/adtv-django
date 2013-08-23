@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+		<title>adtv</title>
+
+	</head>
+
+	<body>
+{% if not form.is_valid  %}
+		<form action="" method="post">
+		{% csrf_token %}
+		    {{ form.non_field_errors }}
+		        {{ form.sdata.errors }}
+		        {{ form.sdata }}
+		        {{ form.sdate.as_hidden }}
+		        
+			<p><input type="submit" value="Search" /></p>
+		</form>
+{% else %}
+	<h3>Registrando datos</h3>
+	<p>{{ form.sdata.value }} y {{ form.sdate.value }}</p>
+{% endif %}
+	</body>
+</html>
