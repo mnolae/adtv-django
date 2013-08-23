@@ -2,8 +2,18 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	{% load staticfiles %}
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    	<!-- Bootstrap -->
+    	<link href="{{ STATIC_URL }}bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
+
+	    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    	<!--[if lt IE 9]>
+      		<script src="{{ STATIC_URL }}bootstrap/assets/js/html5shiv.js"></script>
+      		<script src="{{ STATIC_URL }}bootstrap/assets/js/respond.min.js"></script>
+    	<![endif]-->
 
 		<title>adtv</title>
 
@@ -12,17 +22,23 @@
 	<body>
 {% if not form.is_valid  %}
 		<form action="" method="post">
-		{% csrf_token %}
+		{% csrf_token %} 		
 		    {{ form.non_field_errors }}
 		        {{ form.sdata.errors }}
 		        {{ form.sdata }}
 		        {{ form.sdate.as_hidden }}
 		        
-			<p><input type="submit" value="Search" /></p>
+			<input type="submit" value="Search" class="btn btn-default" />
 		</form>
 {% else %}
 	<h3>Registrando datos</h3>
 	<p>{{ form.sdata.value }} y {{ form.sdate.value }}</p>
 {% endif %}
+
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="//code.jquery.com/jquery.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="{{ STATIC_URL }}bootstrap/dist/js/bootstrap.min.js"></script>
+
 	</body>
 </html>

@@ -2,6 +2,8 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from models import Search, SearchForm
 
+import os
+
 def index(request):
     if request.method == 'POST': # If the form has been submitted...
         form = SearchForm(request.POST) # A form bound to the POST data
